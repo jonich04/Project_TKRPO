@@ -1,10 +1,10 @@
 
 {% extends "base.html" %}
 {% load app_filters %}
-{% block title %}Update Prescription{% endblock %}
+{% block title %}Обновить рецепт{% endblock %}
 {% block sidebar_medtest %}active{% endblock %}
-{% block body_header %}Update Prescription{% endblock %}
+{% block body_header %}Обновить рецепт{% endblock %}
 {% block body %}
-    <p class="lead">Make changes to the prescription and click '{{ form_button }}' when finished.</p>
+    <p class="lead">Внесите изменения в рецепт и нажмите '{{ form_button }}' когда закончите.</p>
     {% include "singleform.html" %}
 {% endblock %}

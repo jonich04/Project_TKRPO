@@ -1,1 +1,1 @@
-[{"model": "server.symptom", "pk": 2, "fields": {"name": "Cold & Cough", "description": "Very common"}}]
+[{"model": "server.symptom", "pk": 1, "fields": {"name": "Головная боль", "description": "Головные боли"}}, {"model": "server.symptom", "pk": 2, "fields": {"name": "Кашель", "description": "Кашель может быть сухим или влажным (с выделением мокроты)"}}, {"model": "server.symptom", "pk": 3, "fields": {"name": "Гипертония", "description": "Основные симптомы — головная боль, головокружение, но иногда протекает бессимптомно."}}]

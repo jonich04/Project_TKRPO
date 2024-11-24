@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
 
-    <title>Virtual Clinic {% block title %}{% endblock %}</title>
+    <title>Клиника {% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.2/flatly/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" type="text/css" href="/static/css/dashboard.css"/>
@@ -30,32 +30,32 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/{% block brand_link %}profile/{% endblock %}"><i class="fa fa-hospital-o"></i>  VirtualClinic</a>
+                <a class="navbar-brand" href="/{% block brand_link %}profile/{% endblock %}"><i class="fa fa-hospital-o"></i>  Запись на прием к врачу</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     {% if user|isAuthenticated %}
                         <li class="dropdown">
-                            <a href="/profile/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account Management <span class="caret"></span></a>
+                            <a href="/profile/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Управление профиля <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="/profile/">Signed in as {{ user.username }}</a></li>
+                                <li><a href="/profile/">Войти через {{ user.username }}</a></li>
                                 <li class="divider"></li>
-                                <li><a href="/profile/">View Profile<i class="pull-right fa fa-user"></i></a></li>
-                                <li><a href="/profile/update/">Update Profile<i class="pull-right fa fa-pencil"></i></a></li>
-                                <li><a href="/profile/password">Change Password<i class="pull-right fa fa-cog"></i></a></li>
+                                <li><a href="/profile/">Профиль<i class="pull-right fa fa-user"></i></a></li>
+                                <li><a href="/profile/update/">Обновить профиль<i class="pull-right fa fa-pencil"></i></a></li>
+                                <li><a href="/profile/password">Изменить пароль<i class="pull-right fa fa-cog"></i></a></li>
                                 <li class="divider"></li>
-                                <li><a href="/logout">Logout<i class="pull-right fa fa-sign-out"></i></i></a></li>
+                                <li><a href="/logout">Выйти<i class="pull-right fa fa-sign-out"></i></i></a></li>
                             </ul>
                         </li>
                     {% else %}
                         <li>
-                            <p class="nav navbar-text" style="color: #FFF">Not signed in</p>
+                            <p class="nav navbar-text" style="color: #FFF">Не авторизован</p>
                         </li>
                     {% endif %}
                     <li>
                         {% block nav_button %}{% endblock %}
                     </li>
-                    <li><a data-toggle="modal" data-target="#aboutus-modal">About us</a></li>
+                    <li><a data-toggle="modal" data-target="#aboutus-modal">О нас</a></li>
                 </ul>
             </div>
         </div>
@@ -74,26 +74,26 @@
                 <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         {% if user.account.role >= 0 %}
-                            <li class="{% block sidebar_profile %}{% endblock %}"><a href="/profile/">Profile<i class="pull-right fa fa-user"></i></a></li>
-                            <li class="{% block sidebar_message %}{% endblock %}"><a href="/message/list/">Messages<i class="pull-right fa fa-envelope"></i></a></li>
+                            <li class="{% block sidebar_profile %}{% endblock %}"><a href="/profile/">Профиль<i class="pull-right fa fa-user"></i></a></li>
+                            <li class="{% block sidebar_message %}{% endblock %}"><a href="/message/list/">Сообщения<i class="pull-right fa fa-envelope"></i></a></li>
                         {% endif %}
                         {% if user.account.role == 10 or user.account.role == 20 %}
-                            <li class="{% block sidebar_appointment %}{% endblock %}"><a href="/appointment/list/">Appointments<i class="pull-right fa fa-calendar"></i></a></li>
-                            <li class="{% block sidebar_medicalinfo %}{% endblock %}"><a href="{% if user.account.role == 10 %}/medicalinfo/patient/{% else %}/medicalinfo/list/{% endif %}">Medical Info<i class="pull-right fa fa-heartbeat"></i></a></li>
+                            <li class="{% block sidebar_appointment %}{% endblock %}"><a href="/appointment/list/">Записи<i class="pull-right fa fa-calendar"></i></a></li>
+                            <li class="{% block sidebar_medicalinfo %}{% endblock %}"><a href="{% if user.account.role == 10 %}/medicalinfo/patient/{% else %}/medicalinfo/list/{% endif %}">Медицинская информация<i class="pull-right fa fa-heartbeat"></i></a></li>
                         {% endif %}
                         {% if user.account.role == 40 or user.account.role == 10 or user.account.role == 20 %}
-                            <li class="{% block sidebar_medtest %}{% endblock %}"><a href="/medtest/list">Medical Tests<i class="pull-right fa fa-flask"></i></a></li>
+                            <li class="{% block sidebar_medtest %}{% endblock %}"><a href="/medtest/list">Медицинские тесты<i class="pull-right fa fa-flask"></i></a></li>
                         {% endif %}
                         {% if user.account.role == 10 or user.account.role == 20 or user.account.role == 50 %}
-                            <li class="{% block sidebar_prescription %}{% endblock %}"><a href="/prescription/list/">Prescriptions<i class="pull-right fa fa-file-text"></i></a></li>
+                            <li class="{% block sidebar_prescription %}{% endblock %}"><a href="/prescription/list/">Рецепты<i class="pull-right fa fa-file-text"></i></a></li>
                         {% endif %}
                         {% if user.account.role == 30 %}
-                            <li class="{% block sidebar_admin_hospital %}{% endblock %}"><a href="/admin/add_hospital/">Add hospitals<i class="pull-right fa fa-hospital-o"></i></a></li>
-                            <li class="{% block sidebar_admin_symptom %}{% endblock %}"><a href="/admin/symptom/">Manage Symptom<i class="pull-right fa fa-hospital-o"></i></a></li>
-                            <li class="{% block sidebar_admin_speciality %}{% endblock %}"><a href="/admin/speciality/">Manage Speciality<i class="pull-right fa fa-stethoscope"></i></a></li>
-                            <li class="{% block sidebar_admin_users %}{% endblock %}"><a href="/admin/users/">Manage Users<i class="pull-right fa fa-users"></i></a></li>
-                            <li class="{% block sidebar_admin_activity %}{% endblock %}"><a href="/admin/activity/">View Activity<i class="pull-right fa fa-eye"></i></a></li>
-                            <li class="{% block sidebar_admin_statistics %}{% endblock %}"><a href="/admin/statistics/">View Statistics<i class="pull-right fa fa-bar-chart"></i></a></li>
+                            <li class="{% block sidebar_admin_hospital %}{% endblock %}"><a href="/admin/add_hospital/">Добавит клиники<i class="pull-right fa fa-hospital-o"></i></a></li>
+                            <li class="{% block sidebar_admin_symptom %}{% endblock %}"><a href="/admin/symptom/">Управление болезнями<i class="pull-right fa fa-hospital-o"></i></a></li>
+                            <li class="{% block sidebar_admin_speciality %}{% endblock %}"><a href="/admin/speciality/">Управление специальностью <i class="pull-right fa fa-stethoscope"></i></a></li>
+                            <li class="{% block sidebar_admin_users %}{% endblock %}"><a href="/admin/users/">Управление пользователем<i class="pull-right fa fa-users"></i></a></li>
+                            <li class="{% block sidebar_admin_activity %}{% endblock %}"><a href="/admin/activity/">Представление активности<i class="pull-right fa fa-eye"></i></a></li>
+                            <li class="{% block sidebar_admin_statistics %}{% endblock %}"><a href="/admin/statistics/">Представление статистики<i class="pull-right fa fa-bar-chart"></i></a></li>
                             <li class="{% block sidebar_admin_import %}{% endblock %}"><a href="/admin/import/">CSV Management<i class="pull-right fa fa-upload"></i></a></li>
                         {% endif %}
                     </ul>

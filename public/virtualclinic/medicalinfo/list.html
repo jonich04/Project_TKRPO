@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 {% load app_filters %}
 {% block title %}
-    View Medical Info
+Просмотр медицинской информации
 {% endblock %}
 {% block sidebar_medicalinfo %}
-    active
+активный
 {% endblock %}
-{% block body_header %}
-    View Patient's Medical Information
+{% block body_header %}   
+Просмотр медицинской информации пациента
 {% endblock %}
 {% block body %}
     <table id="datatable" class="table table-hover table-striped table-bordered">
         <thead>
-            <th>Patient</th>
-            <th>Blood Type</th>
-            <th>Allergy</th>
-            <th data-dafultsort="disabled">Options</th>
+            <th>Пациент</th>
+            <th>Группа крови</th>
+            <th>Аллергия</th>
+            <th data-dafultsort="disabled">Опции</th>
         </thead>
         <tbody>
             {% for medicalinfo in query %}
@@ -25,7 +25,7 @@
                     <td>{{ medicalinfo.allergy }}</td>
                     <td>
                         {% if not user.account.role == 20 %}
-                            <a class="btn btn-warning btn-sm" href="/medicalinfo/update/?pk={{ medicalinfo.pk }}" role="button">Update</a>
+                            <a class="btn btn-warning btn-sm" href="/medicalinfo/update/?pk={{ medicalinfo.pk }}" role="button">Обновить</a>
                         {% endif %}
                     </td>
                 </tr>

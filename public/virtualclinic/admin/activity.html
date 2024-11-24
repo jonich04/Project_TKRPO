@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% load app_filters %}
-{% block title %}View Activity{% endblock %}
+{% block title %}Смотреть активности{% endblock %}
 {% block sidebar_admin_activity %}active{% endblock %}
 {% block body_header %}
-    View Activity on VirtualClinic
+    Смотреть активность записи на прием к врачу
     <br>
-    <a class="btn btn-success btn-sm" href="/admin/backup/" role="button">BackUp Data</a>
+    <a class="btn btn-success btn-sm" href="/admin/backup/" role="button">Резервное копирование данных</a>
 {% endblock %}
 {% block body %}
 
     <table id="datatable" class="table table-hover table-striped table-bordered">
         <thead>
-            <th>Type</th>
-            <th>Description</th>
-            <th>User</th>
-            <th>Time</th>
+            <th>Тип</th>
+            <th>Описание</th>
+            <th>пользователь</th>
+            <th>время</th>
         </thead>
         <tbody>
             {% for action in query %}

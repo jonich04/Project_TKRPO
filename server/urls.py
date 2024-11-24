@@ -21,7 +21,7 @@ urlpatterns = [
     re_path(r'^logout/$', views_home.logout_view, name='logout'),
     re_path(r'^register/$', views_home.register_view, name='register'),
     re_path(r'^setup/$', views_home.setup_view, name='setup'),
-
+    
     re_path(r'^error/denied/$', views_home.error_denied_view, name='error/denied'),
 
     re_path(r'^admin/users/$', views_admin.users_view, name='admin/users'),

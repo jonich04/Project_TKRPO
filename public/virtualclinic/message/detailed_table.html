@@ -1,12 +1,12 @@
 {% load app_filters %}
 <table id="message-detailed-table" class="table table-hover table-striped table-bordered">
     <thead>
-        <th>To</th>
-        <th>From</th>
-        <th>Subject</th>
-        <th>Timestamp</th>
-        <th>Options</th>
-        <th style="display:none;">Deleted</th>
+        <th>К</th>
+        <th>От</th>
+        <th>Предмет</th>
+        <th>Временная метка</th>
+        <th>Опции</th>
+        <th style="display:none;">Удалено</th>
     </thead>
     <tbody>
         {% for message in messages %}
@@ -29,8 +29,8 @@
                     </script>
                     <form id="confirm-modal-action" action="./" method="post">{% csrf_token %}
                         <input id="confirm-modal-hidden" type="hidden" name="pk" value="{{ message.pk }}">
-                        <a class="btn btn-success btn-sm" href="/message/new/?pk={{ message.sender.pk }}" role="button">Reply</a>
-                        <button onclick="proxy{{ message.pk }}()" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#read-modal">Read</button>
+                        <a class="btn btn-success btn-sm" href="/message/new/?pk={{ message.sender.pk }}" role="button">Отвечать</a>
+                        <button onclick="proxy{{ message.pk }}()" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#read-modal">читать</button>
                         {% if message.sender == user.account and message.sender_deleted %}
                         {% elif message.target == user.account and message.target_deleted %}
                         {% else %}

@@ -34,7 +34,7 @@ def new_view(request):
     # Get template data from session
     template_data = views.parse_session(
         request,
-        {'form_button':"Send Message"}
+        {'form_button':"Отправить сообщение"}
     )
     # Proceed with the rest of the view
     if request.method == 'POST':
@@ -42,8 +42,8 @@ def new_view(request):
         if form.is_valid():
             message = form.generate(request.user.account)
             message.save()
-            logger.log(Action.ACTION_MESSAGE, 'Message Sent', request.user.account)
-            request.session['alert_success'] = "Successfully sent your message!"
+            logger.log(Action.ACTION_MESSAGE, 'Отправленные сообщения', request.user.account)
+            request.session['alert_success'] = "Ваши сообщение успешно отправлены!"
             return HttpResponseRedirect('/message/list')
     else:
         # Validation Check. Make sure a message exists for the given pk.
@@ -54,7 +54,7 @@ def new_view(request):
                 account = Account.objects.get(pk=pk)
                 default['target'] = pk
             except Exception:
-                template_data['alert_danger'] = "We couldn't find your the person you're replying to. Please try again"
+                template_data['alert_danger'] = "Нам не удалось найти человека, которому вы отвечаете. Пожалуйста, попробуйте еще раз"
 
         form = MessageForm(default)
         form.clear_errors()

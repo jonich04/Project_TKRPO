@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% load app_filters %}
 {% block title %}
-    View Messages
+Просмотр сообщений
 {% endblock %}
 {% block sidebar_message %}
     active
 {% endblock %}
 {% block body_header %}
-    View Messages
+Просмотр сообщений
     <br>
-    <a class="btn btn-success btn-sm" href="/message/new/" role="button">New message</a>
+    <a class="btn btn-success btn-sm" href="/message/new/" role="button">Новое сообщение</a>
 {% endblock %}
 {% block body %}
     <div role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#messages-received" id="messages-received" role="tab" data-toggle="tab"><i class="fa fa-arrow-circle-down"></i> Received messages</a></li>
-            <li role="presentation"><a href="#messages-sent" id="messages-sent" role="tab" data-toggle="tab"><i class="fa fa-arrow-circle-up"></i> Sent messages</a></li>
-            <li role="presentation"><a href="#messages-sent" id="messages-deleted" role="tab" data-toggle="tab"><i class="fa fa-archive"></i> Archived messages</a></li>
+            <li role="presentation" class="active"><a href="#messages-received" id="messages-received" role="tab" data-toggle="tab"><i class="fa fa-arrow-circle-down"></i> Полученные сообщения</a></li>
+            <li role="presentation"><a href="#messages-sent" id="messages-sent" role="tab" data-toggle="tab"><i class="fa fa-arrow-circle-up"></i> Отправленные сообщения</a></li>
+            <li role="presentation"><a href="#messages-sent" id="messages-deleted" role="tab" data-toggle="tab"><i class="fa fa-archive"></i> Архивированные сообщения</a></li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active">

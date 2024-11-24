@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load app_filters %}
-{% block title %}View System Stics{% endblock %}
+{% block title %}Просмотр статистики{% endblock %}
 {% block sidebar_admin_statistics%}active{% endblock %}
 {% block body_header %}
-    View VirtualClinic System Statistics
+    Просмотр статистики записи на прием врачу
 {% endblock %}
 {% block body %}
     <div class="col-sm-6">
@@ -14,23 +14,23 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Users logged in</td>
+                    <td>Пользователи вошли</td>
                     <td>{{ total_logins }}</td>
                 </tr>
                 </tr>
-                    <td>Users logged out</td>
+                    <td>пользователи вышли</td>
                     <td>{{ total_logouts }}</td>
                 </tr>
                 </tr>
-                    <td>Appointments created</td>
+                    <td>Создание записи</td>
                     <td>{{ total_appointments }}</td>
                 </tr>
                 </tr>
-                    <td>Medical tests created</td>
+                    <td>Создание медицинских тестов</td>
                     <td>{{ total_med_tests }}</td>
                 </tr>
                 </tr>
-                    <td>Users registered</td>
+                    <td>Регистрация пользователей</td>
                     <td>{{ total_registered }}</td>
                 </tr>
             </tbody>

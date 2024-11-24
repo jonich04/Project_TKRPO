@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% load app_filters %}
-{% block title %}Speciality{% endblock %}
+{% block title %}Специальность{% endblock %}
 {% block sidebar_admin_speciality %}active{% endblock %}
 {% block body_header %}
     View Speciality
     <br>
-    <a class="btn btn-success btn-sm" href="/admin/add_speciality/" role="button">Add Speciality</a>
+    <a class="btn btn-success btn-sm" href="/admin/add_speciality/" role="button">Добавить специальность</a>
 {% endblock %}
 {% block body %}
     <table id="datatable" class="table table-hover table-striped table-bordered">
         <thead>
-            <th>Speciality</th>
-            <th>Description</th>
-            <th>Option</th>
+            <th>Специальность</th>
+            <th>описание</th>
+            <th>опции</th>
         </thead>
         <tbody>
             {% for speciality in query %}
@@ -38,7 +38,7 @@
             $('#datatable').DataTable();
         });
         function configureModal(pk, name) {
-            document.getElementById('confirm-modal-body').innerHTML = 'Are you sure you want to delete the speciality '.concat(name, '?');
+            document.getElementById('confirm-modal-body').innerHTML = 'Вы уверены, что хотите удалить специальность? '.concat(name, '?');
             document.getElementById('confirm-modal-hidden').value = pk;
         }
     </script>

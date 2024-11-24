@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load app_filters %}
-{% block title %}Update Profile{% endblock %}
+{% block title %}Обновить профиль{% endblock %}
 {% block sidebar_profile %}active{% endblock %}
-{% block body_header %}Update Profile{% endblock %}
+{% block body_header %}Обновить профиль{% endblock %}
 {% block body %}
-    <p class="lead">Make changes to your profile and click '{{ form_button }}' when finished.</p>
+    <p class="lead">Внесите изменения в свой профиль и нажмите '{{ form_button }}' когда закончите.</p>
     {% include "singleform.html" %}
 {% endblock %}

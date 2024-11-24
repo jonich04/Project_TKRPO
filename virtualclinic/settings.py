@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'virtualclinic.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+		'ENGINE': 'django.db.backends.mysql',
+		'NAME': 'virtual_clinic',
+		'HOST': '127.0.0.1',
+		'PORT': 3306,
+		'USER': 'root',
+		'PASSWORD': '3922'
     }
 }
 
@@ -102,6 +106,7 @@ DATABASES = {
 #         'PORT': '',
 #     }
 # }
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 
@@ -149,4 +154,5 @@ STATIC_URL = '/static/'
 
 #STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
 
-STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
+#STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.ManifestStaticFilesStorage'

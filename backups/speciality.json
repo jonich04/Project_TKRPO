@@ -1,1 +1,1 @@
-[{"model": "server.speciality", "pk": 1, "fields": {"name": "ENT", "description": "Ear Nose Throat"}}]
+[{"model": "server.speciality", "pk": 1, "fields": {"name": "Терапевт", "description": "терапевт"}}, {"model": "server.speciality", "pk": 2, "fields": {"name": "Хирург", "description": "Специализируется на лечении заболеваний и травм, требующих оперативного вмешательства."}}, {"model": "server.speciality", "pk": 3, "fields": {"name": "Кардиолог", "description": "Лечит заболевания сердечно-сосудистой системы: гипертония, ишемическая болезнь сердца."}}]

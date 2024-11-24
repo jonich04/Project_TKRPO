@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% load app_filters %}
 {% block title %}
-    Upload Test Result
+Загрузить результат теста
 {% endblock %}
 {% block sidebar_medtest %}
     active
 {% endblock %}
 {% block body_header %}
-    Upload Test Result
+Загрузить результат теста
 {% endblock %}
 {% block body %}
-    <p class="lead">Fill out this medical test form and click '{{ form_button }}' when finished.</p>
+    <p class="lead">Заполните эту форму медицинского обследования и нажмите '{{ form_button }}' когда закончите.</p>
     {% include "singleform.html" %}
 {% endblock %}

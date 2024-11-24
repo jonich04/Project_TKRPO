@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% load app_filters %}
 {% block title %}
-    Update Appointment
+Обновить запись
 {% endblock %}
 {% block sidebar_appointment %}
     active
 {% endblock %}
 {% block body_header %}
-    Update Appointment
+Обновить запись
 {% endblock %}
 {% block body %}
     {% if appointment.status == "Active" %}
-        <p class="lead">Make changes to the appointment and click '{{ form_button }}' when finished.</p>
+        <p class="lead">Внесите изменения в записи и нажмите '{{ form_button }}' когда закончите.</p>
         {% include "singleform.html" %}
     {% else %}
-         <p class="lead">The requested appointment is no longer active.</p>
+         <p class="lead">Запрошенная встреча больше не активна.</p>
         <div class="col-sm-3">
-            <a href="/appointment/list/" class="btn btn-primary btn-block" role="button">Return to appointment list</a>
+            <a href="/appointment/list/" class="btn btn-primary btn-block" role="button">Вернуться к списку встреч</a>
         </div>
     {% endif %}
 {% endblock %}

@@ -1,25 +1,25 @@
 {% extends "base.html" %}
 {% load app_filters %}
-{% block title %}Speciality{% endblock %}
+{% block title %}Специальность{% endblock %}
 {% block sidebar_admin_symptom %}active{% endblock %}
 {% block body_header %}
     View Symptom
     <br>
-    <a class="btn btn-success btn-sm" href="/admin/add_symptom/" role="button">Add Symptom</a>
+    <a class="btn btn-success btn-sm" href="/admin/add_symptom/" role="button">Добавить симптом</a>
 {% endblock %}
 {% block body %}
     <table id="datatable" class="table table-hover table-striped table-bordered">
         <thead>
-            <th>Symptom</th>
-            <th>Description</th>
-            <th>Option</th>
+            <th>симптом</th>
+            <th>описание</th>
+            <th>опции</th>
         </thead>
         <tbody>
             {% for symptom in query %}
                 <tr>
                     <td>{{ symptom.name }}</td>
                     <td>{{ symptom.description }}</td>
-                    <td><button onclick="proxy{{ symptom.pk }}()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#symptom-modal">Delete</button></td>
+                    <td><button onclick="proxy{{ symptom.pk }}()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#symptom-modal">удалить</button></td>
                 <script type="text/javascript">
                     function proxy{{ symptom.pk }}() {
                         configureModal(

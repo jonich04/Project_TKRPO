@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% load app_filters %}
 {% block title %}
-    Update Medical Info
+Обновить медицинскую информацию
 {% endblock %}
 {% block sidebar_medicalinfo %}
     active
 {% endblock %}
 {% block body_header %}
-    Update Medical Info
+Обновить медицинскую информацию
 {% endblock %}
 {% block body %}
-    <p class="lead">Make changes to your medical info and click '{{ form_button }}' when finished</p>
+    <p class="lead">Внесите изменения в свою медицинскую информацию и нажмите '{{ form_button }}' когда закончите</p>
     {% include "singleform.html" %}
 {% endblock %}

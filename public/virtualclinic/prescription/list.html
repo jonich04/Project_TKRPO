@@ -1,30 +1,30 @@
 {% extends "base.html" %}
 {% load app_filters %}
 {% block title %}
-    View Prescriptions
+Посмотреть рецепты
 {% endblock %}
 {% block sidebar_prescription %}
     active
 {% endblock %}
 {% block body_header %}
-    View Prescriptions
+Посмотреть рецепты
     {% if user.account.role == 20 %}
         <br>
-        <a class="btn btn-success btn-sm" href="/prescription/create/" role="button">Add Prescription</a>
+        <a class="btn btn-success btn-sm" href="/prescription/create/" role="button">Добавить рецепт</a>
     {% endif %}
 {% endblock %}
 {% block body %}
     <table id="datatable" class="table table-hover table-striped table-bordered">
         <thead>
-            <th>Doctor</th>
-            <th>Patient</th>
-            <th>Medication</th>
-            <th>Strength</th>
-            <th>Date</th>
-            <th>Number of Refill(s)</th>
-            <th>Status</th>
-            <th data-defaultsort='disabled'>Options</th>
-            <th>Invoice</th>
+            <th>Доктор</th>
+            <th>Пациент</th>
+            <th>Медикамент</th>
+            <th>Сила</th>
+            <th>дата</th>
+            <th>Количество пополнений</th>
+            <th>статус</th>
+            <th data-defaultsort='disabled'>Опции</th>
+            <th>Счет</th>
         </thead>
         <tbody>
             {% for prescription in query %}
@@ -48,15 +48,15 @@
                                         {% endautoescape %});
                                     }
                                 </script>
-                                <button onclick="proxy{{ prescription.pk }}()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#form-modal">Delete</button>
-                                <a class="btn btn-warning btn-sm" href="/prescription/update/?pk={{ prescription.pk }}" role="button">Update</a>
+                                <button onclick="proxy{{ prescription.pk }}()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#form-modal">Удалить </button>
+                                <a class="btn btn-warning btn-sm" href="/prescription/update/?pk={{ prescription.pk }}" role="button">Обновить</a>
                             {% endif %}
                             {% if user.account.role == 50 %}
-                                <a class="btn btn-warning btn-sm" href="/prescription/update/?pk={{ prescription.pk }}" role="button">Update</a>
+                                <a class="btn btn-warning btn-sm" href="/prescription/update/?pk={{ prescription.pk }}" role="button">Обновить</a>
                             {% endif %}
                         {% endif %}
                     </td>
-                    <td><a class="btn btn-info btn-sm" href="/pdf/?pk={{ prescription.pk }}" role="button">Generate Invoice</a></td>
+                    <td><a class="btn btn-info btn-sm" href="/pdf/?pk={{ prescription.pk }}" role="button">Создать счет</a></td>
                 </tr>
             {% endfor %}
         </tbody>

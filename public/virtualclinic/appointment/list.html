@@ -1,22 +1,24 @@
 {% extends "base.html" %}
 {% load app_filters %}
 {% block title %}
-    Views Appointments
+    
+Просмотры записи
 {% endblock %}
 {% block sidebar_appointment %}
     active
 {% endblock %}
 {% block body_header %}
-    View Appointments
+    
+Просмотры Назначения
     <br>
-    <a class="btn btn-success btn-sm" href="/appointment/create/" role="button">New Appointment</a>
-    <a class="btn btn-primary btn-sm" href="/appointment/calendar/" role="button">Calendar View</a>
+    <a class="btn btn-success btn-sm" href="/appointment/create/" role="button">Новое назначение</a>
+    <a class="btn btn-primary btn-sm" href="/appointment/calendar/" role="button">Просмотр календаря</a>
 {% endblock %}
 {% block body %}
     <div role="tabpanel">
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#appointments-active" id="appointments-active" role="tab" data-toggle="tab">Active Appointments</a></li>
-            <li role="presentation" class="active"><a href="#appointments-cancelled" id="appointments-cancelled" role="tab" data-toggle="tab">Cancelled Appointments</a></li>
+            <li role="presentation" class="active"><a href="#appointments-active" id="appointments-active" role="tab" data-toggle="tab">Активные записи</a></li>
+            <li role="presentation" class="active"><a href="#appointments-cancelled" id="appointments-cancelled" role="tab" data-toggle="tab">Отмененные записи</a></li>
         </ul>
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane active">
@@ -25,19 +27,19 @@
                     <thead>
                         <th>
                             {% if user.account.role != 20 %}
-                                Doctor
+                                Доктор
                             {% endif %}
                             {% if user.account.role != 10 %}
-                                Patient
+                                Пациент
                             {% endif %}
                         </th>
-                        <th>Description</th>
-                        <th>Hospital</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Status</th>
-                        <th data-defaultsort='disabled'>Options</th>
-                        <th>Type</th>
+                        <th>Описание</th>
+                        <th>клиника</th>
+                        <th>Время начало</th>
+                        <th>Время окончания</th>
+                        <th>статус</th>
+                        <th data-defaultsort='disabled'>опции</th>
+                        <th>тип</th>
                     </thead>
                     <tbody>
                         {% for appointment in query %}
@@ -57,7 +59,7 @@
                                 <td>{{ appointment.status }}</td>
                                 <td>
                                     {% if appointment.status == "Active" %}
-                                        <a class="btn btn-warning btn-sm" href="/appointment/update/?pk={{ appointment.pk }}" role="button">Update</a>
+                                        <a class="btn btn-warning btn-sm" href="/appointment/update/?pk={{ appointment.pk }}" role="button">Обновить</a>
                                         {% if not user.account.role == 0 %}
                                             <script type="text/javascript">
                                                 function proxy{{ appointment.pk }}() {
@@ -68,7 +70,7 @@
                                                         )
                                                 };
                                             </script>
-                                            <button onclick="proxy{{ appointment.pk }}()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirm-modal">Cancel</button>
+                                            <button onclick="proxy{{ appointment.pk }}()" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#confirm-modal">удалить</button>
                                         {% endif %}
                                     {% endif %}
                                 </td>

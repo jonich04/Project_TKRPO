@@ -39,23 +39,40 @@ def setup_view(request):
     return render(request,'virtualclinic/setup.html',template_data)
 
 
+from django.contrib.auth import logout
+from django.http import HttpResponseRedirect
+import logging
+
+# Убедитесь, что используется стандартный логгер Django
+logger = logging.getLogger(__name__)
+
 def logout_view(request):
     if request.user.is_authenticated:
-        logger.log(Action.ACTION_ACCOUNT, "Account logout",request.user.account)
-    # Django deletes the session on logout, so we need to preserve any alerts currently waiting to be displayed
-    saved_data = {}
-    if request.session.has_key('alert_success'):
-        saved_data['alert_success'] = request.session['alert_success']
-    else:
-        saved_data['alert_success'] = "You have successfully logged out."
-    if request.session.has_key('alert_danger'):
-        saved_data['alert_danger'] = request.session['alert_danger']
-    logout(request)
-    if 'alert_success' in saved_data:
-        request.session['alert_success'] = saved_data['alert_success']
-    if 'alert_danger' in saved_data:
-        request.session['alert_danger'] = saved_data['alert_danger']
+        # Проверка на наличие связанного аккаунта
+        if hasattr(request.user, 'account'):
+            logger.log(Action.ACTION_ACCOUNT, "Account logout", request.user.account)
+        else:
+            # Используем стандартный уровень логирования, если warning не определен
+            logger.log(logging.WARNING, "Попытка выхода пользователя без аккаунта")
+
+        # Сохраняем текущие алерты из сессии
+        saved_data = {}
+        if 'alert_success' in request.session:
+            saved_data['alert_success'] = request.session['alert_success']
+        else:
+            saved_data['alert_success'] = "Вы успешно вышли из системы."
+        
+        if 'alert_danger' in request.session:
+            saved_data['alert_danger'] = request.session['alert_danger']
+        
+        # Выход пользователя
+        logout(request)
+        
+        # Восстанавливаем алерты после очистки сессии
+        request.session.update(saved_data)
+
     return HttpResponseRedirect('/')
+
 
 
 def login_view(request):
@@ -65,7 +82,7 @@ def login_view(request):
     elif Account.objects.all().count() == 0:
         return HttpResponseRedirect('/setup/')
     # get template data from session
-    template_data = views.parse_session(request,{'form_button':"Login"})
+    template_data = views.parse_session(request,{'form_button':"Вход"})
     # Proceed with the rest of view
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -77,11 +94,11 @@ def login_view(request):
             userInfo = Account.objects.get(user=user)
             if userInfo.archive == False:
                 login(request,user)
-                logger.log(Action.ACTION_ACCOUNT,"Account login",request.user.account)
-                request.session['alert_success'] = "Successfully logged into VirtualClinic."
+                logger.log(Action.ACTION_ACCOUNT,"Вход в аккаунт",request.user.account)
+                request.session['alert_success'] = "Вы успешно вошли ."
                 return HttpResponseRedirect('/profile/')
             else:
-                request.session['alert_danger'] = "Account is archived! Please create a new account"
+                request.session['alert_danger'] = "Такого аккаунта нет, создайте новый"
                 return HttpResponseRedirect('/register/')
     else:
         form = LoginForm()
@@ -96,7 +113,7 @@ def register_view(request):
     elif Account.objects.all().count() == 0:
         return HttpResponseRedirect('/setup/')
     # Get template data from session
-    template_data = views.parse_session(request, {'form_button': "Register"})
+    template_data = views.parse_session(request, {'form_button': "Регистрация"})
     # Proceed with rest of the view
     if request.method == 'POST':
         form = AccountRegisterForm(request.POST)
@@ -115,7 +132,7 @@ def register_view(request):
             )
             logger.log(Action.ACTION_ACCOUNT, "Account Login", user.account)
             login(request,user)
-            request.session['alert_success'] = "Successfully registered with VirtualClinic."
+            request.session['alert_success'] = "Вы успешно зарегестрировались"
             return HttpResponseRedirect('/profile/')
     else:
         form = AccountRegisterForm()

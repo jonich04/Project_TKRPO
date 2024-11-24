@@ -17,7 +17,7 @@ def create_view(request):
     if authentication_result is not None:
         return authentication_result
     # Get template data from session
-    template_data = views.parse_session(request,{'form_button':"Add Prescription"})
+    template_data = views.parse_session(request,{'form_button':"Добавить рецепт"})
     default = {}
     if request.user.account.role == Account.ACCOUNT_DOCTOR:
         default['doctor'] = request.user.account.pk
@@ -38,10 +38,10 @@ def create_view(request):
                 refill = form.cleaned_data['refill'],
             )
             pres.save()
-            logger.log(Action.ACTION_PRESCRIPTION,'Prescription Created', request.user.account)
+            logger.log(Action.ACTION_PRESCRIPTION,'Рецепт создан', request.user.account)
             form = PrescriptionForm(default)   # Clean form data when page is redisplayed
             form._errors = {}
-            request.session['alert_success'] = "Successfully added the prescription."
+            request.session['alert_success'] = "Рецепт успешно добавлен.."
             return HttpResponseRedirect('/prescription/list/')
     else:
         form._errors = {}
@@ -70,10 +70,10 @@ def list_view(request):
                 prescription = Prescription.objects.get(pk=pk)
                 prescription.active = False
                 prescription.save()
-                logger.log(Action.ACTION_PRESCRIPTION,'Prescription Cancelled', request.user.account)
-                template_data['alert_success'] = "The prescription has been deleted."
+                logger.log(Action.ACTION_PRESCRIPTION,'Рецепт отменен', request.user.account)
+                template_data['alert_success'] = "Рецепт был удален."
             except Exception:
-                template_data['alert_danger'] = "Unable to delete the prescription. Please try again later."
+                template_data['alert_danger'] = "Не удалось удалить рецепт. Пожалуйста, повторите попытку позже."
     if request.user.account.role == Account.ACCOUNT_DOCTOR:
         prescriptions = Prescription.objects.filter(doctor=request.user.account)
     elif request.user.account.role == Account.ACCOUNT_PATIENT:
@@ -94,7 +94,7 @@ def update_view(request):
     try:
         prescription = Prescription.objects.get(pk=pk)
     except Exception:
-        request.session['alert_danger'] = "The requested prescription does not exist"
+        request.session['alert_danger'] = "Запрошенный рецепт не существует."
         return HttpResponseRedirect('/error/denied')
     # Get the template data from the session
     template_data = views.parse_session(
@@ -111,8 +111,8 @@ def update_view(request):
         if form.is_valid():
             form.assign(prescription)
             prescription.save()
-            logger.log(Action.ACTION_PRESCRIPTION, 'Prescription Updated', request.user.account)
-            template_data['alert_success'] = "Prescription has been updated"
+            logger.log(Action.ACTION_PRESCRIPTION, 'Рецепт обновлен', request.user.account)
+            template_data['alert_success'] = "Рецепт обновлен"
             template_data['form'] = form
     else:
         form = PrescriptionForm(prescription.get_populated_fields())
